@@ -1,0 +1,55 @@
+using System.Collections.ObjectModel;
+using System.Windows;
+using WpfApp.Models;
+
+namespace WpfApp
+{
+    public partial class MainWindow : Window
+    {
+        public ObservableCollection<Person> People { get; set; }
+
+        public MainWindow()
+        {
+            InitializeComponent();
+            People = new ObservableCollection<Person>
+            {
+                new Person { Name = "Kiss Péter", Age = 30 },
+                new Person { Name = "Nagy Anna", Age = 25 },
+                new Person { Name = "Tóth Gábor", Age = 40 }
+            };
+
+            DataContext = this;
+        }
+
+        private void DetailsButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (personDataGrid.SelectedItem is Person selected)
+            {
+                DetailsWindow dw = new DetailsWindow(selected);
+                dw.Show();
+            }
+            else
+            {
+                MessageBox.Show("Kérlek válassz ki egy személyt!", "Figyelem", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (personDataGrid.SelectedItem is Person selected)
+            {
+                var result = MessageBox.Show($"Biztosan törlöd {selected.Name}-t?", "Megerősítés",
+                    MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    People.Remove(selected);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nincs kijelölve személy!", "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+    }
+}

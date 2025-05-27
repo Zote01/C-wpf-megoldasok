@@ -1,0 +1,20 @@
+using System.Windows;
+using WpfApp.Models;
+
+namespace WpfApp
+{
+    public partial class DetailsWindow : Window
+    {
+        public DetailsWindow(Person person)
+        {
+            InitializeComponent();
+            nameText.Text = $"Név: {person.Name}";
+            ageText.Text = $"Kor: {person.Age}";
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+    }
+}
