@@ -12,7 +12,7 @@
         <DataGrid x:Name="personDataGrid" AutoGenerateColumns="False" SelectionMode="Single"
                   IsReadOnly="True" ItemsSource="{Binding People}" Margin="0,0,0,10">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Név" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Kor" Binding="{Binding Kor}" Width="*"/>
                 <DataGridTextColumn Header="Kor" Binding="{Binding Age}"/>
             </DataGrid.Columns>
         </DataGrid>
